@@ -20,14 +20,65 @@
         li { margin: 12px 0; }
         a { color: #0066cc; text-decoration: none; }
         a:hover { text-decoration: underline; }
+
+        /* Auth code display */
+        #auth-code-box {
+            display: none;
+            margin: 24px 0;
+            padding: 20px;
+            background: #f0f9ff;
+            border: 2px solid #0066cc;
+            border-radius: 8px;
+            text-align: center;
+        }
+        #auth-code-box h2 {
+            margin: 0 0 8px;
+            font-size: 1.1em;
+            color: #0066cc;
+        }
+        #auth-code-box code {
+            display: block;
+            padding: 12px;
+            margin: 12px 0;
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1.05em;
+            word-break: break-all;
+            user-select: all;
+            cursor: pointer;
+        }
+        #auth-code-box .hint {
+            font-size: 0.85em;
+            color: #666;
+        }
     </style>
 </head>
 <body>
     <h1>OptiLoop</h1>
     <p class="subtitle">Legal Documents</p>
+
+    <div id="auth-code-box">
+        <h2>TikTok Authorization Code</h2>
+        <p>Copy this code and paste it into the OptiLoop CLI:</p>
+        <code id="auth-code"></code>
+        <p class="hint">Click the code to select it, then Cmd+C / Ctrl+C to copy.</p>
+    </div>
+
     <ul>
         <li><a href="tos.html">Terms of Service</a></li>
         <li><a href="privacy.html">Privacy Policy</a></li>
     </ul>
+
+    <script>
+        (function() {
+            var params = new URLSearchParams(window.location.search);
+            var code = params.get('code');
+            if (code) {
+                document.getElementById('auth-code').textContent = code;
+                document.getElementById('auth-code-box').style.display = 'block';
+            }
+        })();
+    </script>
 </body>
 </html>
